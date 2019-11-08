@@ -6,18 +6,24 @@
  * Time: 12:09 AM
  */
 
+$regex = "/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/";
+
 function validFirst($name) {
     if(empty($name)){
         return false;
     }
-    return ctype_alpha($name);
+    $valid = preg_match("/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/", $name);
+    return $valid;
+//    return ctype_alpha($name);
 }
 
 function validLast($name) {
     if(empty($name)){
         return false;
     }
-    return ctype_alpha($name);
+    $valid = preg_match("/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/", $name);
+    return $valid;
+//    return ctype_alpha($name);
 }
 
 function validBirth($date) {
