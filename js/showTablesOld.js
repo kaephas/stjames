@@ -2,14 +2,11 @@
  * Alex, Zach, Antonio, Pavel
  * http://azap.greenrivertech.net/index.php */
 
-
 // adds a listener to window.onload
 $(document).ready(function() {
-	// hide the DataTables on load
-	$("#hideTable").hide();
-
 	$("#guestInfo").DataTable( {
-		"order": [[ 2, "asc" ]]
+		"order": [[ 2, "asc" ]],
+		"oSearch": {"sSearch": "Empty Search"}
 	});
 	$("#needInfo").DataTable( {
 		"order": [[ 5, "asc" ]]
@@ -25,20 +22,7 @@ $(document).ready(function() {
 	});
 
 	showTable();
-});
 
-// Display dataTables only after initial search is chosen
-$("#search").on('click', function() {
-	// Get search value
-	let filter = $("#startFilter").val();
-	// Get main table
-	let table = $("#guestInfo").DataTable();
-	// redraw table with filter set
-	table.search(filter).draw();
-	// show table
-	$("#hideTable").show();
-	// hide the initial search box
-	$("#searchFilter").hide();
 });
 
 function showTable()
