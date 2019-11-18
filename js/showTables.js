@@ -4,8 +4,9 @@
 
 // adds a listener to window.onload
 $(document).ready(function() {
+	let main = $("#guestInfo");
 
-	$("#guestInfo").DataTable( {
+	main.DataTable( {
 		// last name = 2
 		"order": [[ 2, "asc" ]]
 	});
@@ -22,20 +23,28 @@ $(document).ready(function() {
 		"order": [[ 2, "asc" ]]
 	});
 
+	// set row click redirect
+	let table = main.DataTable();
+	$("#guestInfo tbody").on('click', 'tr', function() {
+		// data = table.row(this).data();
+		window.location = $(this).attr('data-href');
+	});
+
 	// Display dataTables only after initial search is chosen
-	let search = $("#search");
-	search.on('click', function() {
+
+	$("#search").on('click', function() {
 		// Get search value
 		let filter = $("#startFilter").val();
+		// redraw tables with filter
+		main.DataTable().search(filter).draw();
 
-		// // redraw tables with filter
-		$("#guestInfo").DataTable().search(filter).draw();
+		// set filter on all secondary tables
 		$("#needInfo").DataTable().search(filter).draw();
 		$("#incomeInfo").DataTable().search(filter).draw();
 		$("#addressInfo").DataTable().search(filter).draw();
 		$("#houseInfo").DataTable().search(filter).draw();
 
-		// show table
+		// un-hide table
 		$("#hideTable").show();
 		// hide the initial search box
 		$("#searchFilter").hide();
@@ -50,11 +59,11 @@ $(document).ready(function() {
 			search.click();
 		}
 	});
-
-	let rows = $(".clickableRow");
-	rows.on('click', function() {
-		window.location = $(this).attr('data-href');
-	})
+	// TODO: remove once working (saved for reference)
+	// let rows = $(".clickableRow");
+	// rows.on('click', function() {
+	// 	window.location = $(this).attr('data-href');
+	// });
 });
 
 
