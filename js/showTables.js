@@ -2,13 +2,11 @@
  * Alex, Zach, Antonio, Pavel
  * http://azap.greenrivertech.net/index.php */
 
-
 // adds a listener to window.onload
 $(document).ready(function() {
-	// hide the DataTables on load
-	$("#hideTable").hide();
 
 	$("#guestInfo").DataTable( {
+		// last name = 2
 		"order": [[ 2, "asc" ]]
 	});
 	$("#needInfo").DataTable( {
@@ -24,22 +22,41 @@ $(document).ready(function() {
 		"order": [[ 2, "asc" ]]
 	});
 
-	showTable();
+	// Display dataTables only after initial search is chosen
+	let search = $("#search");
+	search.on('click', function() {
+		// Get search value
+		let filter = $("#startFilter").val();
+
+		// // redraw tables with filter
+		$("#guestInfo").DataTable().search(filter).draw();
+		$("#needInfo").DataTable().search(filter).draw();
+		$("#incomeInfo").DataTable().search(filter).draw();
+		$("#addressInfo").DataTable().search(filter).draw();
+		$("#houseInfo").DataTable().search(filter).draw();
+
+		// show table
+		$("#hideTable").show();
+		// hide the initial search box
+		$("#searchFilter").hide();
+
+		showTable();
+	});
+
+	// "click" if enter is pressed
+	$("#startFilter").keyup(function(event) {
+		// keyCode 13 = enter
+		if(event.keyCode === 13) {
+			search.click();
+		}
+	});
+
+	let rows = $(".clickableRow");
+	rows.on('click', function() {
+		window.location = $(this).attr('data-href');
+	})
 });
 
-// Display dataTables only after initial search is chosen
-$("#search").on('click', function() {
-	// Get search value
-	let filter = $("#startFilter").val();
-	// Get main table
-	let table = $("#guestInfo").DataTable();
-	// redraw table with filter set
-	table.search(filter).draw();
-	// show table
-	$("#hideTable").show();
-	// hide the initial search box
-	$("#searchFilter").hide();
-});
 
 function showTable()
 {

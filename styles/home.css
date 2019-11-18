@@ -55,6 +55,11 @@ div#guestInfo_filter label, div#needInfo_filter label, div#incomeInfo_filter lab
 }
 
 /* Data table styles */
+#hideTable
+{
+    display: none;
+}
+
 
 div#info
 {
@@ -67,6 +72,12 @@ div#needs, div#address, div#household, div#income
     display: none;
     padding-bottom: 2%;
 }
+
+/* change to pointer on hover row */
+.clickableRow td:hover {
+    cursor: pointer;
+}
+
 
 /* View Form button */
 
