@@ -60,9 +60,9 @@
             <div class="btn-group mb-2">
                 <button type="button" class="btn btn-primary" id="guestbtn">Guest Info</button>
                 <button type="button" class="btn btn-primary" id="needbtn">Needs</button>
-                <button type="button" class="btn btn-primary" id="incomebtn">Income</button>
-                <button type="button" class="btn btn-primary" id="addressbtn">Address</button>
-                <button type="button" class="btn btn-primary" id="housebtn">Household</button>
+<!--                <button type="button" class="btn btn-primary" id="incomebtn">Income</button>-->
+<!--                <button type="button" class="btn btn-primary" id="addressbtn">Address</button>-->
+<!--                <button type="button" class="btn btn-primary" id="housebtn">Household</button>-->
             </div>
         </div>
     </div>
@@ -143,131 +143,6 @@
             </tfoot>
         </table> <!-- Need Table -->
     </div> <!-- Container -->
-
-    <div class="container" id="income">
-        <h3 class="text-muted">Guest Income</h3>
-        <table id="incomeInfo" class="display">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Monthly Income</th>
-                <th>Monthly Rent</th>
-                <th>Food Stamps</th>
-                <th>Additional Support</th>
-            </tr>
-            </thead>
-            <tbody>
-            <repeat group="{{ @guests}}" value="{{ @guest }}">
-                <check if="{{ @guest['hidden'] != 'y' }}">
-                    <tr>
-                        <td>{{@guest['ClientId']}}</td>
-                        <td>{{@guest['first']}} </td>
-                        <td>{{@guest['last']}}</td>
-                        <td>{{@guest['income']}}</td>
-                        <td>{{@guest['rent']}}</td>
-                        <td>{{@guest['foodStamp']}}</td>
-                        <td>{{@guest['addSupport']}}</td>
-                    </tr>
-                </check>
-            </repeat>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Monthly Income</th>
-                <th>Monthly Rent</th>
-                <th>Food Stamps</th>
-                <th>Additional Support</th>
-            </tr>
-            </tfoot>
-        </table> <!-- Income Table -->
-    </div> <!-- Container -->
-    <div class="container" id="address">
-        <h3 class="text-muted">Guest Addresses</h3>
-        <table id="addressInfo" class="display">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Zip</th>
-                <th>Email</th>
-            </tr>
-            </thead>
-            <tbody>
-            <repeat group="{{ @guests}}" value="{{ @guest }}">
-                <check if="{{ @guest['hidden'] != 'y' }}">
-                    <tr>
-                        <td>{{@guest['ClientId']}}</td>
-                        <td>{{@guest['first']}} </td>
-                        <td>{{@guest['last']}}</td>
-                        <td>{{@guest['city']}}</td>
-                        <td>{{@guest['street']}}</td>
-                        <td>{{@guest['zip']}}</td>
-                        <td>{{@guest['email']}}</td>
-                    </tr>
-                </check>
-            </repeat>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Zip</th>
-                <th>Email</th>
-            </tr>
-            </tfoot>
-        </table> <!-- Address Table -->
-    </div> <!-- Container -->
-
-    <div class="container" id="household">
-        <h3 class="text-muted">Household Info</h3>
-        <table id="houseInfo" class="display">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Household Member</th>
-                <th>Age</th>
-                <th>Gender</th>
-            </tr>
-            </thead>
-            <tbody>
-            <repeat group="{{ @households}}" value="{{ @household }}">
-                <check if="{{ @household['name'] != null && @household['hidden'] != 'y' }}">
-                    <tr>
-                        <td>{{@household['ClientId']}}</td>
-                        <td>{{@household['first']}}</td>
-                        <td>{{@household['last']}}</td>
-                        <td>{{@household['name']}}</td>
-                        <td>{{@household['age']}}</td>
-                        <td>{{@household['gender']}}</td>
-                    </tr>
-                </check>
-            </repeat>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>ID</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-            </tr>
-            </tfoot>
-        </table> <!-- Houshold Table -->
-    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

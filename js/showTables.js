@@ -15,17 +15,17 @@ $(document).ready(function() {
 		"order": [[ 2, "asc" ]]
 	});
 	$("#needInfo").DataTable( {
-		"order": [[ 5, "asc" ]]
+		"order": [[ 5, "desc" ]]
 	});
-	$("#incomeInfo").DataTable( {
-		"order": [[ 2, "asc" ]]
-	});
-	$("#addressInfo").DataTable( {
-		"order": [[ 2, "asc" ]]
-	});
-	$("#houseInfo").DataTable( {
-		"order": [[ 2, "asc" ]]
-	});
+	// $("#incomeInfo").DataTable( {
+	// 	"order": [[ 2, "asc" ]]
+	// });
+	// $("#addressInfo").DataTable( {
+	// 	"order": [[ 2, "asc" ]]
+	// });
+	// $("#houseInfo").DataTable( {
+	// 	"order": [[ 2, "asc" ]]
+	// });
 
 	// set row click redirect
 	let table = main.DataTable();
@@ -44,9 +44,9 @@ $(document).ready(function() {
 
 		// set filter on all secondary tables
 		$("#needInfo").DataTable().search(filter).draw();
-		$("#incomeInfo").DataTable().search(filter).draw();
-		$("#addressInfo").DataTable().search(filter).draw();
-		$("#houseInfo").DataTable().search(filter).draw();
+		// $("#incomeInfo").DataTable().search(filter).draw();
+		// $("#addressInfo").DataTable().search(filter).draw();
+		// $("#houseInfo").DataTable().search(filter).draw();
 
 		// un-hide table
 		$("#hideTable").show();
@@ -63,12 +63,6 @@ $(document).ready(function() {
 			search.click();
 		}
 	});
-	// TODO: remove once working (saved for reference)
-	// let rows = $(".clickableRow");
-	// rows.on('click', function() {
-	// 	window.location = $(this).attr('data-href');
-	// });
-
 
 });
 
@@ -77,9 +71,9 @@ function showTable()
 {
 	$guest = $("#info"); // main guest table button
 	$needs = $("#needs"); // needs table button
-	$income = $("#income"); // income table button
-	$address = $("#address"); // address table button
-	$household = $("#household"); // household table button
+	// $income = $("#income"); // income table button
+	// $address = $("#address"); // address table button
+	// $household = $("#household"); // household table button
 
 	$("#guestbtn").on({
 		// after clicking button
@@ -107,44 +101,43 @@ function showTable()
 		}
 	});
 
-	$("#incomebtn").on({
-		// after clicking button
-		click : function() {
-			// show table
-			$income.css("display", "block");
-			// hide others
-			$guest.css("display", "none");
-			$needs.css("display", "none");
-			$address.css("display", "none");
-			$household.css("display", "none");
-		}
-	});
-
-	$("#addressbtn").on({
-		// after clicking button
-		click : function() {
-			// show table
-			$address.css("display", "block");
-			// hide others
-			$guest.css("display", "none");
-			$needs.css("display", "none");
-			$income.css("display", "none");
-			$household.css("display", "none");
-		}
-	});
-
-	$("#housebtn").on({
-		// after clicking button
-		click : function() {
-			// show table
-			$household.css("display", "block");
-			// hide others
-			$guest.css("display", "none");
-			$needs.css("display", "none");
-			$income.css("display", "none");
-			$address.css("display", "none");
-		}
-	});
-
+	// $("#incomebtn").on({
+	// 	// after clicking button
+	// 	click : function() {
+	// 		// show table
+	// 		$income.css("display", "block");
+	// 		// hide others
+	// 		$guest.css("display", "none");
+	// 		$needs.css("display", "none");
+	// 		$address.css("display", "none");
+	// 		$household.css("display", "none");
+	// 	}
+	// });
+	//
+	// $("#addressbtn").on({
+	// 	// after clicking button
+	// 	click : function() {
+	// 		// show table
+	// 		$address.css("display", "block");
+	// 		// hide others
+	// 		$guest.css("display", "none");
+	// 		$needs.css("display", "none");
+	// 		$income.css("display", "none");
+	// 		$household.css("display", "none");
+	// 	}
+	// });
+	//
+	// $("#housebtn").on({
+	// 	// after clicking button
+	// 	click : function() {
+	// 		// show table
+	// 		$household.css("display", "block");
+	// 		// hide others
+	// 		$guest.css("display", "none");
+	// 		$needs.css("display", "none");
+	// 		$income.css("display", "none");
+	// 		$address.css("display", "none");
+	// 	}
+	// });
 
 }
