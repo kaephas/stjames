@@ -64,6 +64,8 @@ $(document).ready(function() {
 	// rows.on('click', function() {
 	// 	window.location = $(this).attr('data-href');
 	// });
+
+
 });
 
 
@@ -138,5 +140,9 @@ function showTable()
 			$income.css("display", "none");
 			$address.css("display", "none");
 		}
+	});
+
+	$(function() {
+		$("#startFilter").focus();
 	});
 }
