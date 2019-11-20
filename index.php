@@ -57,8 +57,55 @@ $f3->route('GET /home', function($f3,$params)
         $f3->reroute('/');
     }
     $database = new Database();
-    $guest = $database->getGuests();
-    $f3->set('guests', $guest);
+
+
+
+    $guests = $database->getGuests();
+
+
+//todo
+//
+//    $bday2 =$guests[0];
+//
+//    $bday3 = $bday2['birthdate'];
+//
+//
+//    $validDate =strtotime($bday3);
+//    echo $validDate;
+//    echo $bday3;
+//
+//
+//   $guests[0]['birthdate'] = date('m/d/Y', $validDate);
+//
+//var_dump($guests[1]);
+//
+//
+//
+//
+//
+// for ($i=0; $i<count($guests); $i++);
+//    {
+//       $bday=$guests[$i]['birthdate'];
+//       //
+//        $validDate =strtotime($bday);
+//        $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
+//
+//}
+//
+//
+//
+//   var_dump($guests[1]);
+//
+
+
+
+
+    // converts all date to better format
+
+
+
+
+    $f3->set('guests', $guests);
     $needs = $database->getNeeds();
     $f3->set('needs', $needs);
     $households = $database->getHouseholds();
