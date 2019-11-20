@@ -6,6 +6,10 @@
 $(document).ready(function() {
 	let main = $("#guestInfo");
 
+	$(function() {
+		$("#startFilter").focus();
+	});
+
 	main.DataTable( {
 		// last name = 2
 		"order": [[ 2, "asc" ]]
@@ -142,7 +146,5 @@ function showTable()
 		}
 	});
 
-	$(function() {
-		$("#startFilter").focus();
-	});
+
 }
