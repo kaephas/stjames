@@ -6,6 +6,10 @@
 $(document).ready(function() {
 	let main = $("#guestInfo");
 
+	$(function() {
+		$("#startFilter").focus();
+	});
+
 	main.DataTable( {
 		// last name = 2
 		"order": [[ 2, "asc" ]]
@@ -64,6 +68,8 @@ $(document).ready(function() {
 	// rows.on('click', function() {
 	// 	window.location = $(this).attr('data-href');
 	// });
+
+
 });
 
 
@@ -139,4 +145,6 @@ function showTable()
 			$address.css("display", "none");
 		}
 	});
+
+
 }
