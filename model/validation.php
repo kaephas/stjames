@@ -23,14 +23,19 @@ function validLast($name) {
     }
     $valid = preg_match("/^[a-zA-Z]+[a-zA-Z \'-]*[a-zA-Z]+$/", $name);
     return $valid;
-//    return ctype_alpha($name);
 }
 
 function validBirth($date) {
-    if(empty($date)){
+    $stringDate = strtotime($date);
+    $dateFormat = date('m/d/Y', $stringDate);
+    // separate month, day, and year
+    $dateExploded = explode('/', $dateFormat);
+    // make sure each was found
+    if(count($dateExploded) != 3) {
         return false;
     }
-    return true;
+    // verify valid date values
+    return checkdate($dateExploded[0], $dateExploded[1], $dateExploded[2]);
 }
 
 function validPhone($phone) {
