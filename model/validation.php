@@ -26,6 +26,9 @@ function validLast($name) {
 }
 
 function validBirth($date) {
+    if(empty($date)) {
+        return true;
+    }
     $stringDate = strtotime($date);
     $dateFormat = date('m/d/Y', $stringDate);
     // separate month, day, and year

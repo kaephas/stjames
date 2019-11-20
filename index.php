@@ -65,43 +65,19 @@ $f3->route('GET /home', function($f3,$params)
 
 //todo
 //
-//    $bday2 =$guests[0];
 //
-//    $bday3 = $bday2['birthdate'];
-//
-//
-//    $validDate =strtotime($bday3);
-//    echo $validDate;
-//    echo $bday3;
-//
-//
-//   $guests[0]['birthdate'] = date('m/d/Y', $validDate);
-//
+//echo "Before Loop";
 //var_dump($guests[1]);
 //
-//
-//
-//
-//
-// for ($i=0; $i<count($guests); $i++);
+// for($i=0; $i<count($guests); $i++)
 //    {
 //       $bday=$guests[$i]['birthdate'];
 //       //
 //        $validDate =strtotime($bday);
 //        $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
-//
 //}
-//
-//
-//
+//echo "After Loop";
 //   var_dump($guests[1]);
-//
-
-
-
-
-    // converts all date to better format
-
 
 
 
@@ -519,7 +495,7 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
             $isValid = false;
         }
         //validate birthdate
-        if (!validBirth($birthdate)) {
+        if (!empty($birthdate) && !validBirth($birthdate)) {
             $f3->set('invalidBirthdate', "invalid");
             $isValid = false;
         }
@@ -588,7 +564,7 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
             $guest->setWater($water);
             $guest->setNotes($notes);
             $database = new Database();
-            $database->EditGuest($id,$guest->getfname(),$guest->getlname(),$guest->getBirthdate(),$guest->getPhone(),
+            $database->editGuest($id,$guest->getfname(),$guest->getlname(),$guest->getBirthdate(),$guest->getPhone(),
                 $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
                 $guest->getLicense(),$guest->getPse(),$guest->getWater(),$guest->getIncome(),$guest->getRent(),
                 $guest->getFoodStamp(),$guest->getAddSupport(),$guest->getMental(),$guest->getPhysical(),
