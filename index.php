@@ -375,6 +375,9 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
     $mainMem = array();
     $tempVouch = $database->getUserNeeds($id);
     $tempMem = $database->getUserHousehold($id);
+
+
+
     for($x = 0; $x < sizeof($tempVouch);$x++){
         if(!empty($tempVouch[$x])) {
             $temp = array();
@@ -382,6 +385,14 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
             array_push($mainVouch,$temp);
         }
     }
+
+    //sort vouchers by date
+    function compareOrder($a, $b)
+    {
+        return $a['visitDate'] - $b['visitDate'];
+    }
+    usort($mainVouch, 'compareOrder');
+
     for($x = 0; $x < sizeof($tempMem);$x++){
         if(!empty($tempMem[$x])) {
             $temp = array();
