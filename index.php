@@ -152,7 +152,7 @@ $f3->route('GET|POST /newGuest', function($f3)
     $f3->set('dateToday',$dateToday);
 
     if(isset($_POST['submit'])){
-        
+
         //setting variables
         $firstName = $_POST['first'];
         $lastName = $_POST['last'];
@@ -183,7 +183,7 @@ $f3->route('GET|POST /newGuest', function($f3)
         $name = $_POST['name'];
         $age = $_POST['age'];
         $gender = $_POST['gender'];
-        
+
         //set to hive
         $f3->set('firstName', $firstName);
         $f3->set('lastName', $lastName);
@@ -226,10 +226,10 @@ $f3->route('GET|POST /newGuest', function($f3)
         }
         $f3->set('vouchers', $mainVouch);
         $f3->set('members', $mainMem);
-        
+
         include('model/validation.php');
         $isValid = true;
-        
+
         //validate first Name
         if(!validFirst($firstName)){
             $f3->set('invalidFirstName', "invalid");
@@ -274,10 +274,10 @@ $f3->route('GET|POST /newGuest', function($f3)
             $f3->set('invalidAddSupport', "invalid");
             $isValid = false;
         }
-        
+
         if($isValid){
             $f3->set('formIsSubmited','true');
-            
+
             //replace values for easier access later
             if($income == null){
                 $income = 0;
@@ -303,10 +303,10 @@ $f3->route('GET|POST /newGuest', function($f3)
             if($mental == null){
                 $mental = 0;
             }
-            
+
             //setter for the guest object
             $guest = new Guest($firstName,$lastName,$birthdate);
-            
+
             //add setters for all variables
             $guest->setPhone($phone);
             $guest->setEmail($email);
@@ -327,7 +327,7 @@ $f3->route('GET|POST /newGuest', function($f3)
             $guest->setWater($water);
             $guest->setNotes($notes);
             $database = new Database();
-            
+
             //insert the guest into the database
             $database->insertGuest($guest->getfname(),$guest->getlname(),$guest->getBirthdate(),$guest->getPhone(),
                 $guest->getEmail(),$guest->getEthnicity(),$guest->getStreet(),$guest->getCity(),$guest->getZip(),
@@ -343,7 +343,7 @@ $f3->route('GET|POST /newGuest', function($f3)
                 var_dump($mainVouch);
             echo "</pre>";
             */
-            
+
             if(!empty($mainVouch)){
                 for($i = 0; $i < sizeof($mainVouch);$i++){
                     $database->insertNeeds($mainVouch[$i][4],$mainVouch[$i][3], $mainVouch[$i][2],$mainVouch[$i][0],$mainVouch[$i][1]);
@@ -355,7 +355,7 @@ $f3->route('GET|POST /newGuest', function($f3)
                 }
             }
             $f3->reroute('/home');
-        } 
+        }
     }
     $template = new Template();
     echo $template->render('views/newGuest.html');
@@ -389,7 +389,7 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
     //sort vouchers by date
     function compareOrder($a, $b)
     {
-        return $a['visitDate'] - $b['visitDate'];
+        return strnatcmp($a[3], $b[3]);
     }
     usort($mainVouch, 'compareOrder');
 
