@@ -92,8 +92,9 @@ $f3->route('GET|POST /reports', function($f3,$params) {
         $f3->reroute('/');
     }
     // initialize variable
-    $start = date("Y-m-01");
-    $end = date("Y-m-d");
+    //Changed date Format
+    $start = date("m-d-Y");
+    $end = date("m-d-Y");
     // set to new value when submitting
     if (isset($_POST['submit'])) {
         if (!empty($_POST['start'])) {
