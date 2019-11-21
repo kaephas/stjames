@@ -63,21 +63,20 @@ $f3->route('GET /home', function($f3,$params)
     $guests = $database->getGuests();
 
 
-//todo
-//
-//
-//echo "Before Loop";
-//var_dump($guests[1]);
-//
-// for($i=0; $i<count($guests); $i++)
-//    {
-//       $bday=$guests[$i]['birthdate'];
-//       //
-//        $validDate =strtotime($bday);
-//        $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
-//}
-//echo "After Loop";
-//   var_dump($guests[1]);
+
+
+
+
+  //Date Format
+ for($i=0; $i<count($guests); $i++)
+    {
+       $bday=$guests[$i]['birthdate'];
+       //
+        $validDate =strtotime($bday);
+        $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
+}
+
+
 
 
 
