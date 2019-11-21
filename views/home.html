@@ -120,7 +120,7 @@
             <tbody>
             <repeat group="{{ @needs}}" value="{{ @need }}">
                 <check if="{{ @need['resource'] != null && @need['hidden'] != 'y' }}">
-                    <tr>
+                    <tr class="clickableRow" data-href="{{ @BASE }}/{{@need['Guests_ClientId']}}">
                         <td>{{@need['Guests_ClientId']}}</td>
                         <td>{{@need['first']}} </td>
                         <td>{{@need['last']}}</td>
