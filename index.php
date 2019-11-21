@@ -76,10 +76,6 @@ $f3->route('GET /home', function($f3,$params)
         $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
 }
 
-
-
-
-
     $f3->set('guests', $guests);
     $needs = $database->getNeeds();
     $f3->set('needs', $needs);
@@ -90,25 +86,20 @@ $f3->route('GET /home', function($f3,$params)
 }
 );
 //reports
-$f3->route('GET|POST /reports', function($f3,$params)
-{
+$f3->route('GET|POST /reports', function($f3,$params) {
     //if logged in
-    if(empty($_SESSION['username']))
-    {
+    if (empty($_SESSION['username'])) {
         $f3->reroute('/');
     }
     // initialize variable
     $start = date("Y-m-01");
     $end = date("Y-m-d");
     // set to new value when submitting
-    if (isset($_POST['submit']))
-    {
-        if (!empty($_POST['start']))
-        {
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['start'])) {
             $start = $_POST['start'];
         }
-        if (!empty($_POST['end']))
-        {
+        if (!empty($_POST['end'])) {
             $end = $_POST['end'];
         }
     }
@@ -117,29 +108,40 @@ $f3->route('GET|POST /reports', function($f3,$params)
     $database = new Database();
     //setters for the hive
     $needs = $database->getNeeds();
+
+    //Date Format
+    for ($i = 0; $i < count($needs); $i++) {
+        $bday = $needs[$i]['visitDate'];
+        //
+        $validDate = strtotime($bday);
+        $needs[$i]['visitDate'] = date('m/d/Y', $validDate); //newdate
+    }
+
     $f3->set('needs', $needs);
-    $thrift = $database->getThrift($start,$end);
+
+    $thrift = $database->getThrift($start, $end);
     $f3->set('thrift', $thrift);
-    $gas = $database->getGas($start,$end);
+    $gas = $database->getGas($start, $end);
     $f3->set('gas', $gas);
-    $water = $database->getWater($start,$end);
+    $water = $database->getWater($start, $end);
     $f3->set('water', $water);
-    $energy = $database->getEnergy($start,$end);
+    $energy = $database->getEnergy($start, $end);
     $f3->set('energy', $energy);
-    $food = $database->getFood($start,$end);
+    $food = $database->getFood($start, $end);
     $f3->set('food', $food);
-    $dol = $database->getDol($start,$end);
+    $dol = $database->getDol($start, $end);
     $f3->set('dol', $dol);
-    $other = $database->getOther($start,$end);
+    $other = $database->getOther($start, $end);
     $f3->set('other', $other);
-    $total = $database->getTotal($start,$end);
+    $total = $database->getTotal($start, $end);
     $f3->set('total', $total);
     $template = new Template();
     echo $template->render('views/reports.html');
+
 }
 );
 //newGuest
-$f3->route('GET|POST /newGuest', function($f3)
+$f3->route('GET|POST /newGust', function($f3)
 {
     //if logged in
     if(empty($_SESSION['username']))
