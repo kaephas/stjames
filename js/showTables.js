@@ -28,8 +28,11 @@ $(document).ready(function() {
 	// });
 
 	// set row click redirect
-	let table = main.DataTable();
 	$("#guestInfo tbody").on('click', 'tr', function() {
+		// data = table.row(this).data();
+		window.location = $(this).attr('data-href');
+	});
+	$("#needInfo tbody").on('click', 'tr', function() {
 		// data = table.row(this).data();
 		window.location = $(this).attr('data-href');
 	});
