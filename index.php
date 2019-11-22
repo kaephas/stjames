@@ -63,11 +63,7 @@ $f3->route('GET /home', function($f3,$params)
     $guests = $database->getGuests();
 
 
-
-
-
-
-  //Date Format
+  //Date Format guestinfo
  for($i=0; $i<count($guests); $i++)
     {
        $bday=$guests[$i]['birthdate'];
@@ -78,11 +74,21 @@ $f3->route('GET /home', function($f3,$params)
 
     $f3->set('guests', $guests);
     $needs = $database->getNeeds();
+    //Date Format Guest Needs
+    for($i=0; $i<count($needs); $i++)
+    {
+        $bday=$needs[$i]['visitDate'];
+        //
+        $validDate =strtotime($bday);
+        $needs[$i]['visitDate'] =date('m/d/Y', $validDate); //newdate
+    }
+
     $f3->set('needs', $needs);
     $households = $database->getHouseholds();
     $f3->set('households', $households);
     $template = new Template();
     echo $template->render('views/home.html');
+
 }
 );
 //reports
@@ -117,7 +123,6 @@ $f3->route('GET|POST /reports', function($f3,$params) {
         $validDate = strtotime($bday);
         $needs[$i]['visitDate'] = date('m/d/Y', $validDate); //newdate
     }
-
     $f3->set('needs', $needs);
 
     $thrift = $database->getThrift($start, $end);
@@ -139,6 +144,7 @@ $f3->route('GET|POST /reports', function($f3,$params) {
     $template = new Template();
     echo $template->render('views/reports.html');
 
+
 }
 );
 //newGuest
@@ -149,8 +155,8 @@ $f3->route('GET|POST /newGust', function($f3)
     {
         $f3->reroute('/');
     }
-
-    $dateToday = date("Y-m-d");
+    // date format change
+    $dateToday = date("m/d/Y");
     $f3->set('dateToday',$dateToday);
 
     if(isset($_POST['submit'])){
