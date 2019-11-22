@@ -57,20 +57,16 @@ $f3->route('GET /home', function($f3,$params)
         $f3->reroute('/');
     }
     $database = new Database();
-
-
-
     $guests = $database->getGuests();
 
-
-  //Date Format guestinfo
- for($i=0; $i<count($guests); $i++)
+    //Date Format guestinfo
+    for($i=0; $i<count($guests); $i++)
     {
-       $bday=$guests[$i]['birthdate'];
-       //
-        $validDate =strtotime($bday);
-        $guests[$i]['birthdate'] =date('m/d/Y', $validDate); //newdate
-}
+        $bday=$guests[$i]['birthdate'];
+        //
+        $validDate = strtotime($bday);
+        $guests[$i]['birthdate'] = date('m/d/Y', $validDate); //newdate
+    }
 
     $f3->set('guests', $guests);
     $needs = $database->getNeeds();
@@ -98,7 +94,6 @@ $f3->route('GET|POST /reports', function($f3,$params) {
         $f3->reroute('/');
     }
     // initialize variable
-    //Changed date Format
     $start = date("m-d-Y");
     $end = date("m-d-Y");
     // set to new value when submitting
@@ -118,9 +113,9 @@ $f3->route('GET|POST /reports', function($f3,$params) {
 
     //Date Format
     for ($i = 0; $i < count($needs); $i++) {
-        $bday = $needs[$i]['visitDate'];
+        $visitDate = $needs[$i]['visitDate'];
         //
-        $validDate = strtotime($bday);
+        $validDate = strtotime($visitDate);
         $needs[$i]['visitDate'] = date('m/d/Y', $validDate); //newdate
     }
     $f3->set('needs', $needs);
@@ -148,7 +143,7 @@ $f3->route('GET|POST /reports', function($f3,$params) {
 }
 );
 //newGuest
-$f3->route('GET|POST /newGust', function($f3)
+$f3->route('GET|POST /newGuest', function($f3)
 {
     //if logged in
     if(empty($_SESSION['username']))

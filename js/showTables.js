@@ -1,14 +1,16 @@
 /* Team AZAP
  * Alex, Zach, Antonio, Pavel
- * http://azap.greenrivertech.net/index.php */
+ * http://azap.greenrivertech.net/index.php
+ * 2.0 - Kaephas
+ */
 
 // adds a listener to window.onload
 $(document).ready(function() {
 	let main = $("#guestInfo");
 
-	$(function() {
-		$("#startFilter").focus();
-	});
+	// $(function() {
+	// 	$("#startFilter").focus();
+	// });
 
 	main.DataTable( {
 		// last name = 2
@@ -17,23 +19,12 @@ $(document).ready(function() {
 	$("#needInfo").DataTable( {
 		"order": [[ 5, "desc" ]]
 	});
-	// $("#incomeInfo").DataTable( {
-	// 	"order": [[ 2, "asc" ]]
-	// });
-	// $("#addressInfo").DataTable( {
-	// 	"order": [[ 2, "asc" ]]
-	// });
-	// $("#houseInfo").DataTable( {
-	// 	"order": [[ 2, "asc" ]]
-	// });
 
 	// set row click redirect
 	$("#guestInfo tbody").on('click', 'tr', function() {
-		// data = table.row(this).data();
 		window.location = $(this).attr('data-href');
 	});
 	$("#needInfo tbody").on('click', 'tr', function() {
-		// data = table.row(this).data();
 		window.location = $(this).attr('data-href');
 	});
 
@@ -47,9 +38,6 @@ $(document).ready(function() {
 
 		// set filter on all secondary tables
 		$("#needInfo").DataTable().search(filter).draw();
-		// $("#incomeInfo").DataTable().search(filter).draw();
-		// $("#addressInfo").DataTable().search(filter).draw();
-		// $("#houseInfo").DataTable().search(filter).draw();
 
 		// un-hide table
 		$("#hideTable").show();
@@ -66,7 +54,6 @@ $(document).ready(function() {
 			search.click();
 		}
 	});
-
 });
 
 
@@ -74,9 +61,6 @@ function showTable()
 {
 	$guest = $("#info"); // main guest table button
 	$needs = $("#needs"); // needs table button
-	// $income = $("#income"); // income table button
-	// $address = $("#address"); // address table button
-	// $household = $("#household"); // household table button
 
 	$("#guestbtn").on({
 		// after clicking button
@@ -85,9 +69,6 @@ function showTable()
 			$guest.css("display", "block");
 			// hide others
 			$needs.css("display", "none");
-			$income.css("display", "none");
-			$address.css("display", "none");
-			$household.css("display", "none");
 		}
 	});
 
@@ -98,49 +79,6 @@ function showTable()
 			$needs.css("display", "block");
 			// hide others
 			$guest.css("display", "none");
-			$income.css("display", "none");
-			$address.css("display", "none");
-			$household.css("display", "none");
 		}
 	});
-
-	// $("#incomebtn").on({
-	// 	// after clicking button
-	// 	click : function() {
-	// 		// show table
-	// 		$income.css("display", "block");
-	// 		// hide others
-	// 		$guest.css("display", "none");
-	// 		$needs.css("display", "none");
-	// 		$address.css("display", "none");
-	// 		$household.css("display", "none");
-	// 	}
-	// });
-	//
-	// $("#addressbtn").on({
-	// 	// after clicking button
-	// 	click : function() {
-	// 		// show table
-	// 		$address.css("display", "block");
-	// 		// hide others
-	// 		$guest.css("display", "none");
-	// 		$needs.css("display", "none");
-	// 		$income.css("display", "none");
-	// 		$household.css("display", "none");
-	// 	}
-	// });
-	//
-	// $("#housebtn").on({
-	// 	// after clicking button
-	// 	click : function() {
-	// 		// show table
-	// 		$household.css("display", "block");
-	// 		// hide others
-	// 		$guest.css("display", "none");
-	// 		$needs.css("display", "none");
-	// 		$income.css("display", "none");
-	// 		$address.css("display", "none");
-	// 	}
-	// });
-
 }
