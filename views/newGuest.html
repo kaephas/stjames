@@ -382,22 +382,22 @@
                                 <repeat group="{{ @vouchers }}" value="{{ @voucher }}">
 
                                     <div class='row'>
-                                        <div class='form-group col-2'>
+                                        <div class='form-group col'>
                                             <label class='form-control-label'>Voucher#:</label><input class='form-control' type='text' name='voucher[]' value='{{ @voucher[0] }}'>
                                         </div>
-                                        <div class='form-group col-2'>
+                                        <div class='form-group col'>
                                             <label class='form-control-label'>Check#:</label><input class='form-control' type='text'name='checkNum[]' value='{{ @voucher[1] }}'>
                                         </div>
-                                        <div class='form-group col-2'>
+                                        <div class='form-group col'>
                                             <label class='form-control-label'>Amount:</label>
                                             <div class='input-group'>
                                                 <span class='input-group-addon'>$</span><input class='form-control' type='amount' name='amount[]' value='{{ @voucher[2] }}'>
                                             </div>
                                         </div>
-                                        <div class="form-group col-2">
+                                        <div class="form-group col-3">
                                             <label class="form-control-label">Date:</label><input class='form-control' type='date' name='date[]' value="{{ @voucher[3] }}">
                                         </div>
-                                        <div class='form-group col-2'>
+                                        <div class='form-group col'>
                                             <label class='form-check-label'>Resource:</label>
                                             <label class='d-block'></label>
 
@@ -410,7 +410,9 @@
                                             </select>
 
                                         </div>
-                                        <button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>
+                                        <div class="form-group col">
+                                <button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>
+                            </div>
                                     </div>
                                 </repeat>
                         </span>
@@ -421,23 +423,23 @@
 
                         <span id="voucher-div" name="voucher-div">
                         <div class='row'>
-                            <div class='form-group col-2'>
+                            <div class='form-group col'>
                                 <label class='form-control-label'>Voucher#:</label><input class='form-control' type='text' name='voucher[]'>
                             </div>
-                            <div class='form-group col-2'>
+                            <div class='form-group col'>
                                 <label class='form-control-label'>Check#:</label><input class='form-control' type='text'name='checkNum[]'>
                             </div>
-                            <div class='form-group col-2'>
+                            <div class='form-group col'>
                                 <label class='form-control-label'>Amount:</label>
                                 <div class='input-group'>
                                     <span class='input-group-addon'>$</span><input class='form-control' type='amount' name='amount[]'>
                                 </div>
                             </div>
-                            <div class="form-group col-2">
+                            <div class="form-group col-3">
                                 <label class="form-control-label">Date:</label><input class='form-control' type='date' name='date[]' value="{{ @dateToday }}">
                             </div>
 
-                            <div class='form-group col-2'>
+                            <div class="form-group col">
                                 <label class='form-check-label'>Resource:</label>
                                 <label class='d-block'></label>
 
@@ -450,7 +452,9 @@
                                             </select>
 
                             </div>
-                            <button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>
+                            <div class="form-group col">
+                                <button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>
+                            </div>
                         </div>
                         </span>
                     </false>
@@ -518,13 +522,13 @@
             const CLONE_HTML =
 
         '<div class="row">\n' +
-            '<div class="form-group col-2">\n' +
+            '<div class="form-group col">\n' +
                 '<label class="form-control-label">Voucher#:</label><input class="form-control" type="text" name="voucher[]">\n' +
             '</div>\n' +
-            '<div class="form-group col-2">\n' +
+            '<div class="form-group col">\n' +
                 '<label class="form-control-label">Check#:</label><input class="form-control" type="text" name="checkNum[]" >\n' +
             '</div>\n' +
-            '<div class="form-group col-2">\n' +
+            '<div class="form-group col">\n' +
                 '<label class="form-control-label">Amount:</label>\n' +
                 '<div class="input-group">\n' +
                     '<span class="input-group-addon">$</span><input class="form-control" type="amount" name="amount[]">\n' +
@@ -532,10 +536,10 @@
 
             '</div>\n' +
 
-            '<div class="form-group col-2">\n' +
+            '<div class="form-group col-3">\n' +
                 '<label class="form-control-label">Date:</label><input class="form-control" type="date" name="date[]" value="'+date+'">\n' +
             '</div>\n' +
-            '<div class="form-group col-2"> \n' +
+            '<div class="form-group col"> \n' +
                 '<label class="form-check-label">Resource:</label> \n' +
                 '<label class="d-block"></label> \n' +
                 '<select class="form-control dropdown" name="resource[]">\n' +
@@ -549,9 +553,10 @@
                     '<option value="other">Other</option> \n' +
                 '</select> \n' +
             '</div>  \n' +
-            '<button class="btn btn-danger btn-voucher-delete" type="button">Delete</button> \n' +
+            '<div class="form-group col">' +
+                '<button class="btn btn-danger btn-voucher-delete" type="button">Delete</button>' +
+            '</div> \n' +
         '</div>';
-
 
             console.log(CLONE_HTML);
             $('#voucher-div').append(CLONE_HTML);
