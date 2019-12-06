@@ -42,9 +42,10 @@ function validBirth($date) {
 }
 
 function validPhone($phone) {
-    if(empty($name)){
+    if(empty($phone)){
         return true;
     } else {
+        $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
         return (is_numeric($phone) && (strlen($phone) > 9 && (strlen($phone) < 16)));
     }
 }

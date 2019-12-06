@@ -187,6 +187,13 @@ $f3->route('GET|POST /newGuest', function($f3)
         $age = $_POST['age'];
         $gender = $_POST['gender'];
 
+        // convert phone format
+        $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
+        $area = substr($phone,0, 3);
+        $first = substr($phone, 3, 3);
+        $last = substr($phone,-4);
+        $phone = "(" . $area . ") " . $first . "-" . $last;
+
         //set to hive
         $f3->set('firstName', $firstName);
         $f3->set('lastName', $lastName);
@@ -310,6 +317,9 @@ $f3->route('GET|POST /newGuest', function($f3)
             //setter for the guest object
             $guest = new Guest($firstName,$lastName,$birthdate);
 
+            // strip phone back to all numberic for db
+            $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
+
             //add setters for all variables
             $guest->setPhone($phone);
             $guest->setEmail($email);
@@ -403,6 +413,14 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
             array_push($mainMem,$temp);
         }
     }
+
+    // convert phone format for display
+    $dbPhone = $guest['phone'];
+    $area = substr($dbPhone,0, 3);
+    $first = substr($dbPhone, 3, 3);
+    $last = substr($dbPhone,-4);
+    $guest['phone'] = "(" . $area . ") " . $first . "-" . $last;
+
     $f3->set('firstName', $guest['first']);
     $f3->set('lastName', $guest['last']);
     $f3->set('birthdate', $guest['birthdate']);
@@ -427,6 +445,7 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
     $f3->set('notes', $guest['notes']);
     $f3->set('vouchers', $mainVouch);
     $f3->set('members', $mainMem);
+
     if (isset($_POST['submit'])) {
         $firstName = $_POST['first'];
         $lastName = $_POST['last'];
@@ -457,6 +476,14 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
         $name = $_POST['name'];
         $age = $_POST['age'];
         $gender = $_POST['gender'];
+
+        // convert phone format for display
+        $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
+        $area = substr($phone,0, 3);
+        $first = substr($phone, 3, 3);
+        $last = substr($phone,-4);
+        $phone = "(" . $area . ") " . $first . "-" . $last;
+
         $f3->set('firstName', $firstName);
         $f3->set('lastName', $lastName);
         $f3->set('birthdate', $birthdate);
@@ -478,16 +505,18 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
         $f3->set('pse', $pse);
         $f3->set('water', $water);
         $f3->set('notes', $notes);
+
         $mainVouch = array();
-        for($i = 0; $i < sizeof($voucher);$i++){
+        for($i = 0; $i < sizeof($voucher); $i++){
             if(!empty($voucher[$i]) || !empty($resource[$i]) ) {
                 $temp = array();
-                array_push($temp, $voucher[$i], $checkNum[$i], $amount[$i],$date[$i], $resource[$i]);
-                array_push($mainVouch,$temp);
+                array_push($temp, $voucher[$i], $checkNum[$i], $amount[$i], $date[$i], $resource[$i]);
+                array_push($mainVouch, $temp);
             }
         }
+
         $mainMem = array();
-        for($i = 0; $i < sizeof($name);$i++){
+        for($i = 0; $i < sizeof($name); $i++){
             if(!empty($name[$i])) {
                 $temp = array();
                 array_push($temp, $name[$i], $age[$i], $gender[$i]);
@@ -559,6 +588,8 @@ $f3->route('GET|POST /@client_id', function($f3,$params) {
             }
             $guest = new Guest($firstName,$lastName,$birthdate);
             //add setters for all variables
+            // strip phone back to just numbers for database
+            $phone = str_replace(array("(", ")", " ", "-"), "", $phone);
             $guest->setPhone($phone);
             $guest->setEmail($email);
             $guest->setEthnicity($ethnicity);
