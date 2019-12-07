@@ -86,7 +86,7 @@
                         <td>{{@guest['ClientId']}}</td>
                         <td>{{@guest['first']}} </td>
                         <td>{{@guest['last']}}</td>
-                        <td>{{@guest['birthdate']}}</td>
+                        <td data-sort="{{ strtotime(@guest['birthdate']) }}">{{@guest['birthdate']}}</td>
                         <td>{{@guest['phone']}}</td>
                     </tr>
                 </check>
@@ -126,7 +126,7 @@
                         <td>{{@need['last']}}</td>
                         <td>{{@need['resource']}}</td>
                         <td>{{@need['amount']}}</td>
-                        <td>{{@need['visitDate']}}</td>
+                        <td data-sort="{{ strtotime(@need['visitDate']) }}">{{@need['visitDate']}}</td>
                     </tr>
                 </check>
             </repeat>
