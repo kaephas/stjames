@@ -657,17 +657,30 @@ $f3->route('GET /demographics', function($f3)
     echo $template->render('views/demographics.html');
 }
 );
+
+// temporary route to initialize a new user
+//$f3->route('GET /newUser', function() {
+//    $database = new Database();
+//    $password = 'p566Outreach';
+//    echo $password;
+//    $success = $database->newUser('volunteer', $password);
+//});
+
 $f3->route('GET|POST /profile', function($f3,$params) {
     if(empty($_SESSION['username']))
     {
         $f3->reroute('/');
     }
+    if( $_SESSION['username'] != 'petero') {
+        $f3->reroute('/home');
+    }
     $database = new Database();
-    $username = $_SESSION['username'];
-    $f3->set("username" , $username);
+//    $username = $_SESSION['username'];
+//    $f3->set("username" , $username);
 
     if (isset($_POST['changePassword'])) {
 
+        $username = $_POST['username'];
         $currentPassword = $_POST['currentPassword'];
         $newPassword = $_POST['newPassword'];
         $confirmPassword = $_POST['confirmPassword'];
@@ -677,11 +690,12 @@ $f3->route('GET|POST /profile', function($f3,$params) {
         if(!empty($user)) {
             // if the passwords match
             if ($newPassword == $confirmPassword) {
-                if (strlen($newPassword) > 5) {
+                if (strlen($newPassword) > 7) {
                     $database->changePassword($username, $newPassword);
+                    $f3->set('userUpdate', $username);
                     $f3->set('passChanged', true);
                 } else {
-                    $f3->set('error', 'Password must be at least 6 characters');
+                    $f3->set('error', 'Password must be at least 8 characters');
                 }
             } else {
                 $f3->set('error', 'Passwords do not match');

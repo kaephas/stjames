@@ -579,7 +579,6 @@ class Database
 
         $statement->bindParam(":username", $username, PDO::PARAM_STR);
         $statement->bindParam(":password", $password, PDO::PARAM_STR);
-
         // Execute the statement
         $statement->execute();
 
@@ -611,6 +610,19 @@ class Database
 
         // Execute the statement
         $statement->execute();
+    }
+
+    // make a temporary route to run this to add new users to the database
+    function newUser($username, $password) {
+        $password = sha1($password);
+        $dbh = $this->dbh;
+        $sql = "INSERT INTO Users (username, password)
+                VALUES (:username, :password)";
+        $statement = $dbh->prepare($sql);
+        $statement->bindParam(":username", $username, 2);
+        $statement->bindParam(":password", $password, 2);
+
+        return $statement->execute();
     }
 
     /**

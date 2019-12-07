@@ -187,3 +187,7 @@ p.text-warning
     position: absolute;
     left: 3%;
 }
+
+#username {
+    margin-left: 1em;
+}
