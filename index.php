@@ -59,24 +59,33 @@ $f3->route('GET /home', function($f3,$params)
     $database = new Database();
     $guests = $database->getGuests();
 
-    //Date Format guestinfo
-    for($i=0; $i<count($guests); $i++)
+    //Date and Phone Format guestinfo
+    for($i = 0; $i < count($guests); $i++)
     {
+        // date
         $bday=$guests[$i]['birthdate'];
-        //
         $validDate = strtotime($bday);
         $guests[$i]['birthdate'] = date('m/d/Y', $validDate); //newdate
+
+        // phone
+        if(strlen($guests[$i]['phone']) > 0) {
+            $phone = $guests[$i]['phone'];
+            $area = substr($phone,0, 3);
+            $first = substr($phone, 3, 3);
+            $last = substr($phone,-4);
+            $guests[$i]['phone'] = "(" . $area . ") " . $first . "-" . $last;
+        }
+
     }
 
     $f3->set('guests', $guests);
     $needs = $database->getNeeds();
     //Date Format Guest Needs
-    for($i=0; $i<count($needs); $i++)
+    for($i = 0; $i < count($needs); $i++)
     {
-        $bday=$needs[$i]['visitDate'];
-        //
-        $validDate =strtotime($bday);
-        $needs[$i]['visitDate'] =date('m/d/Y', $validDate); //newdate
+        $visitDate= $needs[$i]['visitDate'];
+        $validDate = strtotime($visitDate);
+        $needs[$i]['visitDate'] = date('m/d/Y', $validDate); //newdate
     }
 
     $f3->set('needs', $needs);
@@ -664,6 +673,12 @@ $f3->route('GET /demographics', function($f3)
 //    $password = 'p566Outreach';
 //    echo $password;
 //    $success = $database->newUser('volunteer', $password);
+//    var_dump($success);
+//    if($success) {
+//        echo 'success';
+//    } else {
+//        echo 'failure';
+//    }
 //});
 
 $f3->route('GET|POST /profile', function($f3,$params) {
